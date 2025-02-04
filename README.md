@@ -1,4 +1,4 @@
-# fns-contracts
+# mns-contracts
 Monad Domains smart contracts
 
 ## Install
