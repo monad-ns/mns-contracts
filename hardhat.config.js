@@ -5,6 +5,7 @@ require('hardhat-deploy');
 
 /** @type import('hardhat/config').HardhatUserConfig */
 
+ 
 module.exports = {
     solidity: {
         compilers: [
@@ -23,8 +24,8 @@ module.exports = {
         artifacts: "./src",
     },
     networks: {
-        monad: {
-            url: "https://testnet-rpc.monad.xyz",
+        monadtestnet: {
+            url: "https://testnet-rpc.monad.xyz/",
             accounts: [process.env.DEPLOYER_PRIVATE_KEY],
         },
         sepolia: {
@@ -34,16 +35,29 @@ module.exports = {
         }
     },
     sourcify: {
-      enabled: false
+      enabled: true,
+      apiUrl: "https://sourcify-api-monad.blockvision.org",
+      browserUrl: "https://testnet.monadexplorer.com",
+      customChains: [
+        {
+          network: "monadtestnet",
+          chainId: 10143,
+          urls: {
+            apiURL: "https://sourcify-api-monad.blockvision.org",
+            browserURL: "https://testnet.monadexplorer.com/"
+          }
+        }
+      ]
     },
     etherscan: {
+        enabled: false,
         apiKey: process.env.ETHER_SCAN_API_KEY,
         customChains: [
           {
-            network: "monad",
-            chainId: 42766,
+            network: "monadtestnet",
+            chainId: 10143,
             urls: {
-              apiURL: "https://testnet-rpc.monad.xyz/api/?module=contract&action=verify",
+              apiURL: "https://testnet.monadexplorer.com/api?module=contract&action=verify",
               browserURL: "https://testnet.monadexplorer.com/"
             }
           }
